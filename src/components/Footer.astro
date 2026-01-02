@@ -1,0 +1,147 @@
+---
+const currentYear = new Date().getFullYear();
+
+const footerLinks = [
+  {
+    title: 'Resources',
+    links: [
+      { label: 'Documentation', href: '/docs/' },
+      { label: 'Playground', href: 'https://play.bmb-lang.org' },
+      { label: 'Examples', href: 'https://github.com/lang-bmb/bmb-samples' },
+    ],
+  },
+  {
+    title: 'Community',
+    links: [
+      { label: 'GitHub', href: 'https://github.com/lang-bmb/lang-bmb' },
+      { label: 'Discussions', href: 'https://github.com/lang-bmb/lang-bmb/discussions' },
+      { label: 'Issues', href: 'https://github.com/lang-bmb/lang-bmb/issues' },
+    ],
+  },
+  {
+    title: 'More',
+    links: [
+      { label: 'Blog', href: '/blog/' },
+      { label: 'Changelog', href: '/changes' },
+      { label: 'License', href: 'https://github.com/lang-bmb/lang-bmb/blob/main/LICENSE' },
+    ],
+  },
+];
+---
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <span class="logo-text">BMB</span>
+      </div>
+      <p class="footer-tagline">
+        AI-Native Programming Language<br />
+        with Contract-Based Verification
+      </p>
+    </div>
+
+    <div class="footer-links">
+      {footerLinks.map(section => (
+        <div class="footer-section">
+          <h4>{section.title}</h4>
+          <ul>
+            {section.links.map(link => (
+              <li>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; {currentYear} BMB Language. Released under the MIT License.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-bg-secondary);
+    border-top: 1px solid var(--color-border);
+    margin-top: auto;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
+
+  .footer-brand {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .footer-logo .logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .footer-tagline {
+    margin-top: 0.75rem;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
+
+  .footer-section h4 {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-section li {
+    margin: 0.375rem 0;
+  }
+
+  .footer-section a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.9375rem;
+    transition: color 0.15s;
+  }
+
+  .footer-section a:hover {
+    color: var(--color-accent);
+  }
+
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+  }
+
+  .footer-bottom p {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    margin: 0;
+  }
+</style>

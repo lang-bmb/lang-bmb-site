@@ -1,0 +1,120 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<Base title={title} description={description}>
+  <div class="docs-container">
+    <aside class="docs-sidebar">
+      <nav class="docs-nav">
+        <h3>Getting Started</h3>
+        <ul>
+          <li><a href="/docs/">Introduction</a></li>
+          <li><a href="/docs/installation">Installation</a></li>
+          <li><a href="/docs/hello-world">Hello World</a></li>
+        </ul>
+
+        <h3>Language Reference</h3>
+        <ul>
+          <li><a href="/docs/basics">Basics</a></li>
+          <li><a href="/docs/functions">Functions</a></li>
+          <li><a href="/docs/types">Types</a></li>
+          <li><a href="/docs/contracts">Contracts</a></li>
+          <li><a href="/docs/memory">Memory Model</a></li>
+        </ul>
+
+        <h3>Standard Library</h3>
+        <ul>
+          <li><a href="/docs/stdlib/core">Core</a></li>
+          <li><a href="/docs/stdlib/string">String</a></li>
+          <li><a href="/docs/stdlib/array">Array</a></li>
+          <li><a href="/docs/stdlib/test">Test</a></li>
+        </ul>
+
+        <h3>Tooling</h3>
+        <ul>
+          <li><a href="/docs/tools/cli">BMB CLI</a></li>
+          <li><a href="/docs/tools/gotgan">Gotgan</a></li>
+          <li><a href="/docs/tools/editor">Editor Setup</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <article class="docs-content">
+      <slot />
+    </article>
+  </div>
+</Base>
+
+<style>
+  .docs-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    gap: 2rem;
+  }
+
+  .docs-sidebar {
+    width: 250px;
+    flex-shrink: 0;
+  }
+
+  .docs-nav h3 {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    margin: 1.5rem 0 0.5rem;
+  }
+
+  .docs-nav h3:first-child {
+    margin-top: 0;
+  }
+
+  .docs-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .docs-nav li {
+    margin: 0.25rem 0;
+  }
+
+  .docs-nav a {
+    display: block;
+    padding: 0.375rem 0.75rem;
+    color: var(--color-text);
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9375rem;
+  }
+
+  .docs-nav a:hover {
+    background: var(--color-bg-secondary);
+    color: var(--color-accent);
+  }
+
+  .docs-content {
+    flex: 1;
+    min-width: 0;
+    max-width: 800px;
+  }
+
+  @media (max-width: 768px) {
+    .docs-container {
+      flex-direction: column;
+    }
+
+    .docs-sidebar {
+      width: 100%;
+    }
+  }
+</style>

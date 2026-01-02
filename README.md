@@ -17,46 +17,41 @@ BMB 프로그래밍 언어 공식 웹사이트.
 
 ```
 lang-bmb-site/
-├── README.md
-├── package.json
+├── package.json            # npm 패키지 정의
 ├── astro.config.mjs        # Astro 설정
-├── src/
-│   ├── pages/
-│   │   ├── index.astro     # Landing page
-│   │   ├── docs/           # Documentation
-│   │   │   ├── getting-started.md
-│   │   │   ├── language-reference/
-│   │   │   ├── contracts/
-│   │   │   └── stdlib/
-│   │   ├── download.astro  # Download page
-│   │   ├── changes.astro   # Changelog
-│   │   └── blog/           # Blog posts
-│   ├── components/
-│   │   ├── Header.astro
-│   │   ├── Footer.astro
-│   │   ├── CodeBlock.astro # BMB syntax highlighting
-│   │   └── Playground.astro
-│   ├── layouts/
-│   │   ├── Base.astro
-│   │   └── Docs.astro
-│   └── styles/
-│       └── global.css
+├── tsconfig.json           # TypeScript 설정
 ├── public/
-│   ├── favicon.ico
-│   ├── logo.svg
-│   └── downloads/          # Binary releases
-└── content/
-    ├── docs/               # Markdown documentation
-    └── blog/               # Blog posts
+│   └── favicon.svg         # 파비콘
+├── src/
+│   ├── components/
+│   │   ├── Header.astro    # 헤더 네비게이션
+│   │   ├── Footer.astro    # 푸터
+│   │   └── CodeBlock.astro # BMB 코드 블록
+│   ├── layouts/
+│   │   ├── Base.astro      # 기본 레이아웃
+│   │   └── Docs.astro      # 문서 레이아웃
+│   ├── pages/
+│   │   ├── index.astro     # 랜딩 페이지
+│   │   ├── download.astro  # 다운로드 페이지
+│   │   ├── changes.astro   # 변경로그
+│   │   ├── docs/           # 문서 페이지
+│   │   │   └── index.astro
+│   │   └── blog/           # 블로그
+│   │       └── index.astro
+│   └── styles/
+│       └── global.css      # 전역 스타일
+├── content/
+│   ├── docs/               # 마크다운 문서 (추후)
+│   └── blog/               # 블로그 포스트 (추후)
+└── README.md
 ```
 
 ## Tech Stack
 
-- **Framework**: [Astro](https://astro.build/) - Static site generator
-- **Styling**: Tailwind CSS
-- **Code Highlighting**: Shiki with BMB grammar
-- **Search**: Pagefind (static search)
-- **Hosting**: GitHub Pages / Cloudflare Pages
+- **Framework**: [Astro](https://astro.build/) 4.x - Static site generator
+- **Styling**: Custom CSS (variables, responsive design)
+- **Icons**: SVG inline icons
+- **Hosting**: GitHub Pages / Cloudflare Pages (planned)
 
 ## Development
 
@@ -99,55 +94,34 @@ npm run preview
 
 ### Changelog (/changes)
 - Version history with release notes
+- Timeline visualization
 - Migration guides between versions
-- Breaking changes highlighted
 
 ### Blog (/blog)
 - Development updates
 - Technical deep-dives
 - Community highlights
 
-## Content Management
-
-Documentation is written in Markdown with frontmatter:
-
-```markdown
----
-title: "Getting Started"
-description: "Install BMB and write your first program"
-section: "docs"
-order: 1
----
-
-# Getting Started
-
-Install BMB using the installer script:
-
-\`\`\`bash
-curl -sSf https://bmb-lang.org/install.sh | sh
-\`\`\`
-```
-
 ## Deployment
 
 ```bash
 # Build and deploy to GitHub Pages
 npm run build
-npm run deploy
+# Upload dist/ to hosting
 
 # Or use GitHub Actions (recommended)
-# See .github/workflows/deploy.yml
+# See .github/workflows/deploy.yml (planned)
 ```
 
 ## Roadmap
 
-| Version | Features |
-|---------|----------|
-| v0.1 | Landing page, basic docs structure |
-| v0.2 | Full documentation, download page |
-| v0.3 | Blog, changelog, search |
-| v0.4 | Playground integration, i18n |
-| v1.0 | Complete site with all features |
+| Version | Features | Status |
+|---------|----------|--------|
+| v0.1 | Landing page, basic docs structure | ✅ |
+| v0.2 | Full documentation, download page | 계획 |
+| v0.3 | Blog, changelog, search | 계획 |
+| v0.4 | Playground integration, i18n | 계획 |
+| v1.0 | Complete site with all features | 계획 |
 
 ## Contributing
 

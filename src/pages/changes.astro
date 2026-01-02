@@ -1,0 +1,276 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Changelog" description="BMB version history and release notes">
+  <div class="changes-page">
+    <div class="container">
+      <h1>Changelog</h1>
+      <p class="subtitle">Version history and release notes</p>
+
+      <div class="version-list">
+        <article class="version-entry">
+          <div class="version-header">
+            <h2>v0.9 Harvest</h2>
+            <span class="version-date">2025</span>
+            <span class="version-tag latest">Latest</span>
+          </div>
+
+          <div class="version-content">
+            <h3>v0.9.4 - Playground</h3>
+            <ul>
+              <li>Online playground with Monaco editor</li>
+              <li>BMB syntax highlighting for Monaco</li>
+              <li>URL sharing with LZ-String compression</li>
+              <li>Contract verification visualization</li>
+            </ul>
+
+            <h3>v0.9.3 - Remote Registry</h3>
+            <ul>
+              <li><code>gotgan publish</code> - Package archive creation</li>
+              <li><code>gotgan search</code> - Registry search</li>
+              <li><code>gotgan add &lt;name&gt;</code> - Add from registry</li>
+            </ul>
+
+            <h3>v0.9.2 - VS Code Extension</h3>
+            <ul>
+              <li>TextMate grammar for syntax highlighting</li>
+              <li>LSP client integration</li>
+              <li>Go to definition, find references</li>
+            </ul>
+
+            <h3>v0.9.1 - Tree-sitter Grammar</h3>
+            <ul>
+              <li>Tree-sitter grammar for BMB</li>
+              <li>Syntax highlighting queries</li>
+              <li>Code folding and indentation</li>
+            </ul>
+
+            <h3>v0.9.0 - LSP Extensions</h3>
+            <ul>
+              <li><code>textDocument/formatting</code></li>
+              <li><code>textDocument/definition</code></li>
+              <li><code>textDocument/references</code></li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="version-entry">
+          <div class="version-header">
+            <h2>v0.8 Fruit</h2>
+            <span class="version-date">2025</span>
+          </div>
+
+          <div class="version-content">
+            <p>Package manager (곳간) foundation</p>
+            <ul>
+              <li><code>gotgan new</code> / <code>init</code> - Project creation</li>
+              <li><code>gotgan build</code> / <code>run</code> - Build system</li>
+              <li><code>gotgan add --path</code> - Local dependencies</li>
+              <li><code>gotgan.lock</code> - Reproducible builds</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="version-entry">
+          <div class="version-header">
+            <h2>v0.7 Bloom</h2>
+            <span class="version-date">2025</span>
+          </div>
+
+          <div class="version-content">
+            <p>Developer tooling foundation</p>
+            <ul>
+              <li><code>bmb fmt</code> - Code formatter</li>
+              <li><code>bmb lsp</code> - Language server</li>
+              <li><code>bmb test</code> - Test runner with 40+ assertions</li>
+              <li>GitHub Action for CI/CD</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="version-entry">
+          <div class="version-header">
+            <h2>v0.6 Leaf</h2>
+            <span class="version-date">2024</span>
+          </div>
+
+          <div class="version-content">
+            <p>Standard library foundation (100+ functions)</p>
+            <ul>
+              <li><code>core::num</code>, <code>core::bool</code> - Basic operations</li>
+              <li><code>core::option</code>, <code>core::result</code> - Error handling</li>
+              <li><code>string::*</code> - String manipulation (30+ functions)</li>
+              <li><code>array::*</code> - Array utilities (25+ functions)</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="version-entry">
+          <div class="version-header">
+            <h2>v0.5 Branch</h2>
+            <span class="version-date">2024</span>
+          </div>
+
+          <div class="version-content">
+            <p>Language extensions for bootstrapping</p>
+            <ul>
+              <li>Structs, enums, pattern matching</li>
+              <li>Mutable variables, loops</li>
+              <li>Module system, multi-file support</li>
+              <li>Bootstrap: lexer.bmb, parser.bmb</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="version-entry">
+          <div class="version-header">
+            <h2>v0.4 Stem</h2>
+            <span class="version-date">2024</span>
+          </div>
+
+          <div class="version-content">
+            <p>Native code generation</p>
+            <ul>
+              <li>MIR (Mid-level IR)</li>
+              <li>LLVM IR generation via inkwell</li>
+              <li>Optimization passes (-O0, -O2, -O3)</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="version-entry">
+          <div class="version-header">
+            <h2>v0.3 Root</h2>
+            <span class="version-date">2024</span>
+          </div>
+
+          <div class="version-content">
+            <p>Interpreter and REPL</p>
+            <ul>
+              <li>Tree-walking interpreter</li>
+              <li>Interactive REPL</li>
+              <li>Built-in functions (print, assert)</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="version-entry">
+          <div class="version-header">
+            <h2>v0.2 Sprout</h2>
+            <span class="version-date">2024</span>
+          </div>
+
+          <div class="version-content">
+            <p>Contract verification foundation</p>
+            <ul>
+              <li>SMT-LIB2 translation</li>
+              <li>Z3 solver integration</li>
+              <li>Counterexample reporting</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="version-entry">
+          <div class="version-header">
+            <h2>v0.1 Seed</h2>
+            <span class="version-date">2024</span>
+          </div>
+
+          <div class="version-content">
+            <p>Initial compiler frontend</p>
+            <ul>
+              <li>Logos-based lexer</li>
+              <li>LALRPOP parser</li>
+              <li>Basic type checker</li>
+              <li>Ariadne error reporting</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .changes-page {
+    padding: 4rem 0;
+  }
+
+  .subtitle {
+    color: var(--color-text-muted);
+    font-size: 1.25rem;
+    margin-bottom: 3rem;
+  }
+
+  .version-list {
+    max-width: 800px;
+  }
+
+  .version-entry {
+    border-left: 2px solid var(--color-border);
+    padding-left: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .version-entry::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    background: var(--color-accent);
+    border-radius: 50%;
+  }
+
+  .version-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .version-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  .version-date {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+  }
+
+  .version-tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-muted);
+  }
+
+  .version-tag.latest {
+    background: var(--color-accent);
+    color: white;
+  }
+
+  .version-content h3 {
+    font-size: 1.125rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .version-content h3:first-child {
+    margin-top: 0;
+  }
+
+  .version-content ul {
+    margin-bottom: 0;
+  }
+
+  .version-content p {
+    color: var(--color-text-muted);
+  }
+</style>

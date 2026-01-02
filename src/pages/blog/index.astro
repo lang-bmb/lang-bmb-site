@@ -1,0 +1,102 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// Placeholder posts - in production, these would come from content collections
+const posts = [
+  {
+    title: 'Introducing BMB v0.9 - The Ecosystem Release',
+    date: '2025-01-02',
+    excerpt: 'With v0.9, BMB gains a complete development ecosystem: VS Code extension, online playground, and package registry support.',
+    slug: 'bmb-v09-ecosystem',
+  },
+  {
+    title: 'Why Contract-Based Verification Matters',
+    date: '2024-12-15',
+    excerpt: 'How compile-time contract verification eliminates entire classes of bugs before your code ever runs.',
+    slug: 'contract-based-verification',
+  },
+  {
+    title: 'The Road to Bootstrapping',
+    date: '2024-11-20',
+    excerpt: 'Our journey toward self-hosting: writing the BMB compiler in BMB itself.',
+    slug: 'road-to-bootstrapping',
+  },
+];
+---
+
+<Base title="Blog" description="BMB development blog and technical articles">
+  <div class="blog-page">
+    <div class="container">
+      <h1>Blog</h1>
+      <p class="subtitle">Development updates and technical deep-dives</p>
+
+      <div class="post-list">
+        {posts.map(post => (
+          <article class="post-card">
+            <time datetime={post.date}>{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+            <h2>
+              <a href={`/blog/${post.slug}`}>{post.title}</a>
+            </h2>
+            <p>{post.excerpt}</p>
+            <a href={`/blog/${post.slug}`} class="read-more">Read more →</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .blog-page {
+    padding: 4rem 0;
+  }
+
+  .subtitle {
+    color: var(--color-text-muted);
+    font-size: 1.25rem;
+    margin-bottom: 3rem;
+  }
+
+  .post-list {
+    max-width: 700px;
+  }
+
+  .post-card {
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .post-card:first-child {
+    padding-top: 0;
+  }
+
+  .post-card time {
+    display: block;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .post-card h2 {
+    margin: 0 0 0.75rem;
+    font-size: 1.5rem;
+  }
+
+  .post-card h2 a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .post-card h2 a:hover {
+    color: var(--color-accent);
+  }
+
+  .post-card p {
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .read-more {
+    font-size: 0.9375rem;
+  }
+</style>

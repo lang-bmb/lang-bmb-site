@@ -1,0 +1,68 @@
+---
+import Docs from '../../layouts/Docs.astro';
+---
+
+<Docs title="Introduction" description="Learn about BMB programming language">
+  <h1>Introduction to BMB</h1>
+
+  <p>
+    BMB (Bare-Metal-Banter) is an AI-Native programming language designed for
+    <strong>correctness first</strong> and <strong>native performance</strong>.
+  </p>
+
+  <h2>Key Features</h2>
+
+  <h3>Contract-Based Verification</h3>
+  <p>
+    BMB uses pre/post conditions that are verified at compile-time using an SMT solver (Z3).
+    This means many bugs are caught before your code ever runs.
+  </p>
+
+  <pre><code>fn divide(a: i32, b: i32) -> i32
+  pre  b != 0           // Precondition: b must not be zero
+  post ret * b == a     // Postcondition: result * b equals a
+=
+  a / b;</code></pre>
+
+  <h3>Refinement Types</h3>
+  <p>
+    Express constraints directly in your types:
+  </p>
+
+  <pre><code>type NonZero = i32 where self != 0;
+type Sorted&lt;T: Ord&gt; = [T] where forall(i in 0..len(self)-1): self[i] &lt;= self[i+1];</code></pre>
+
+  <h3>Memory Safety</h3>
+  <p>
+    BMB uses a Rust-inspired ownership model with borrowing and lifetimes:
+  </p>
+
+  <ul>
+    <li><code>T</code> / <code>own T</code> - Owned value</li>
+    <li><code>&amp;T</code> - Immutable reference</li>
+    <li><code>&amp;mut T</code> - Mutable reference (exclusive)</li>
+    <li><code>linear T</code> - Must be used exactly once</li>
+  </ul>
+
+  <h3>Native Performance</h3>
+  <p>
+    BMB compiles to native code via LLVM, producing binaries that match or exceed C -O3 performance.
+    Contract verification happens at compile-time with zero runtime overhead.
+  </p>
+
+  <h2>Getting Started</h2>
+
+  <p>
+    Ready to try BMB? Check out the <a href="/docs/installation">Installation Guide</a>
+    to get started, or try the <a href="https://play.bmb-lang.org">Online Playground</a> first.
+  </p>
+
+  <h2>Design Philosophy</h2>
+
+  <ul>
+    <li><strong>Correctness first</strong> - Contracts prevent bugs at their source</li>
+    <li><strong>Performance</strong> - Must match/exceed C -O3; contracts enable optimizations</li>
+    <li><strong>AI-Native</strong> - Optimized for AI code generation, not human readability</li>
+    <li><strong>Minimal rules, zero exceptions</strong> - Same syntax = same meaning everywhere</li>
+  </ul>
+</Docs>

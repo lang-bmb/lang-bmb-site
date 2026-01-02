@@ -1,0 +1,264 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Download" description="Install BMB programming language">
+  <div class="download-page">
+    <section class="download-hero">
+      <h1>Install BMB</h1>
+      <p class="subtitle">Get started with the BMB compiler and toolchain</p>
+    </section>
+
+    <section class="install-methods">
+      <div class="container">
+        <div class="method-card primary">
+          <h2>Quick Install (Recommended)</h2>
+          <p>Run this command in your terminal:</p>
+          <div class="install-command">
+            <code>curl -sSf https://bmb-lang.org/install.sh | sh</code>
+            <button class="copy-btn" data-copy="curl -sSf https://bmb-lang.org/install.sh | sh">
+              Copy
+            </button>
+          </div>
+          <p class="note">Works on macOS, Linux, and WSL</p>
+        </div>
+
+        <div class="method-grid">
+          <div class="method-card">
+            <h3>Windows</h3>
+            <p>Download the Windows installer:</p>
+            <a href="#" class="btn btn-secondary">bmb-x86_64-windows.msi</a>
+            <p class="version">Latest: v0.9.4</p>
+          </div>
+
+          <div class="method-card">
+            <h3>macOS</h3>
+            <p>Intel and Apple Silicon:</p>
+            <a href="#" class="btn btn-secondary">bmb-universal-darwin.tar.gz</a>
+            <p class="version">Latest: v0.9.4</p>
+          </div>
+
+          <div class="method-card">
+            <h3>Linux</h3>
+            <p>x86_64 binary:</p>
+            <a href="#" class="btn btn-secondary">bmb-x86_64-linux.tar.gz</a>
+            <p class="version">Latest: v0.9.4</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="build-source">
+      <div class="container">
+        <h2>Build from Source</h2>
+        <p>Requires Rust 1.70+ and LLVM 17+</p>
+
+        <pre><code># Clone the repository
+git clone https://github.com/lang-bmb/lang-bmb.git
+cd lang-bmb
+
+# Build the compiler
+cargo build --release
+
+# Add to PATH
+export PATH="$PWD/target/release:$PATH"
+
+# Verify installation
+bmb --version</code></pre>
+      </div>
+    </section>
+
+    <section class="requirements">
+      <div class="container">
+        <h2>System Requirements</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Platform</th>
+              <th>Minimum</th>
+              <th>Recommended</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>OS</td>
+              <td>Windows 10, macOS 12, Linux (glibc 2.17+)</td>
+              <td>Latest versions</td>
+            </tr>
+            <tr>
+              <td>RAM</td>
+              <td>4 GB</td>
+              <td>8 GB+</td>
+            </tr>
+            <tr>
+              <td>Disk</td>
+              <td>500 MB</td>
+              <td>1 GB+</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Optional Dependencies</h3>
+        <ul>
+          <li><strong>Z3 Solver</strong> - Required for contract verification (<code>bmb verify</code>)</li>
+          <li><strong>LLVM 17+</strong> - Required for native compilation (<code>bmb build</code>)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="next-steps">
+      <div class="container">
+        <h2>Next Steps</h2>
+        <div class="next-grid">
+          <a href="/docs/" class="next-card">
+            <h3>Documentation</h3>
+            <p>Learn the language basics and advanced features</p>
+          </a>
+          <a href="https://play.bmb-lang.org" class="next-card">
+            <h3>Playground</h3>
+            <p>Try BMB directly in your browser</p>
+          </a>
+          <a href="https://github.com/lang-bmb/bmb-samples" class="next-card">
+            <h3>Examples</h3>
+            <p>Browse sample programs and patterns</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .download-page {
+    padding-bottom: 4rem;
+  }
+
+  .download-hero {
+    text-align: center;
+    padding: 4rem 1rem 3rem;
+  }
+
+  .subtitle {
+    color: var(--color-text-muted);
+    font-size: 1.25rem;
+  }
+
+  .install-methods {
+    padding: 2rem 0;
+  }
+
+  .method-card {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .method-card.primary {
+    background: var(--color-bg-tertiary);
+    border-color: var(--color-accent);
+  }
+
+  .method-card h2, .method-card h3 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+  }
+
+  .install-command {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--color-bg-primary);
+    padding: 1rem;
+    border-radius: 6px;
+    margin: 1rem 0;
+    overflow-x: auto;
+  }
+
+  .install-command code {
+    flex: 1;
+    background: none;
+    padding: 0;
+    font-size: 1rem;
+  }
+
+  .copy-btn {
+    background: var(--color-accent);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    flex-shrink: 0;
+  }
+
+  .copy-btn:hover {
+    background: var(--color-accent-hover);
+  }
+
+  .note {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    margin: 0;
+  }
+
+  .method-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .method-grid .method-card {
+    margin: 0;
+    text-align: center;
+  }
+
+  .version {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    margin-top: 0.75rem;
+  }
+
+  .build-source, .requirements, .next-steps {
+    padding: 3rem 0;
+  }
+
+  .build-source {
+    background: var(--color-bg-secondary);
+  }
+
+  .next-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .next-card {
+    display: block;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: border-color 0.15s;
+  }
+
+  .next-card:hover {
+    border-color: var(--color-accent);
+  }
+
+  .next-card h3 {
+    color: var(--color-text);
+    margin: 0 0 0.5rem;
+  }
+
+  .next-card p {
+    color: var(--color-text-muted);
+    margin: 0;
+    font-size: 0.9375rem;
+  }
+</style>

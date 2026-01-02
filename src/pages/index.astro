@@ -1,0 +1,330 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Home">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="highlight">Contract-Verified</span><br />
+        Native Performance
+      </h1>
+      <p class="hero-description">
+        BMB is an AI-Native programming language with built-in contract verification.
+        Write correct code by design, with native performance that matches or exceeds C.
+      </p>
+      <div class="hero-actions">
+        <a href="/docs/" class="btn btn-primary">Get Started</a>
+        <a href="https://play.bmb-lang.org" class="btn btn-secondary" target="_blank" rel="noopener">
+          Try Online
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-code">
+      <div class="code-window">
+        <div class="code-header">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="filename">factorial.bmb</span>
+        </div>
+        <pre class="code-content"><code><span class="comment">// Verified at compile-time</span>
+<span class="keyword">fn</span> <span class="function">factorial</span>(n: <span class="type">i32</span>) -> <span class="type">i32</span>
+  <span class="contract">pre</span>  n >= 0
+  <span class="contract">post</span> ret >= 1
+=
+  <span class="keyword">if</span> n <= 1 <span class="keyword">then</span> 1
+  <span class="keyword">else</span> n * factorial(n - 1);
+
+<span class="keyword">fn</span> <span class="function">main</span>() -> <span class="type">i32</span> =
+  factorial(<span class="number">5</span>);  <span class="comment">// Returns 120</span></code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">Why BMB?</h2>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>Contract Verification</h3>
+          <p>
+            Pre/post conditions verified at compile-time using SMT solver (Z3).
+            Catch bugs before they happen.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Native Performance</h3>
+          <p>
+            LLVM-based code generation produces binaries that match or exceed C -O3.
+            Zero runtime overhead.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <h3>AI-Native Design</h3>
+          <p>
+            Optimized for AI code generation with clear, predictable syntax.
+            Minimal rules, zero exceptions.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>Memory Safety</h3>
+          <p>
+            Rust-inspired ownership model with borrowing and lifetimes.
+            Safe by default.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📦</div>
+          <h3>Modern Tooling</h3>
+          <p>
+            Built-in formatter, LSP, test runner, and package manager (곳간).
+            Everything you need, included.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔄</div>
+          <h3>Refinement Types</h3>
+          <p>
+            Express constraints directly in types: <code>NonZero</code>, <code>Sorted&lt;T&gt;</code>.
+            Types that carry guarantees.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Start Section -->
+  <section class="quickstart">
+    <div class="container">
+      <h2 class="section-title">Quick Start</h2>
+
+      <div class="quickstart-steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Install</h3>
+            <pre><code>curl -sSf https://bmb-lang.org/install.sh | sh</code></pre>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Create a project</h3>
+            <pre><code>gotgan new hello && cd hello</code></pre>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Run</h3>
+            <pre><code>gotgan run</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* Hero */
+  .hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 1rem;
+  }
+
+  .hero-content {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .highlight {
+    color: var(--color-accent);
+  }
+
+  .hero-description {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-code {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .code-window {
+    background: var(--color-bg-tertiary);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .code-window .code-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .dot.red { background: #ff5f56; }
+  .dot.yellow { background: #ffbd2e; }
+  .dot.green { background: #27c93f; }
+
+  .code-window .filename {
+    margin-left: 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+  }
+
+  .code-content {
+    padding: 1.5rem;
+    margin: 0;
+    background: transparent;
+    font-size: 0.9375rem;
+  }
+
+  /* Syntax highlighting */
+  .keyword { color: #c586c0; }
+  .contract { color: #dcdcaa; font-style: italic; }
+  .type { color: #4ec9b0; }
+  .function { color: #dcdcaa; }
+  .number { color: #b5cea8; }
+  .comment { color: #6a9955; font-style: italic; }
+
+  /* Features */
+  .features {
+    background: var(--color-bg-secondary);
+    padding: 4rem 0;
+  }
+
+  .section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .feature-card {
+    background: var(--color-bg-tertiary);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+  }
+
+  .feature-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-card p {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    margin: 0;
+  }
+
+  /* Quick Start */
+  .quickstart {
+    padding: 4rem 0;
+  }
+
+  .quickstart-steps {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .step {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .step-number {
+    width: 40px;
+    height: 40px;
+    background: var(--color-accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .step-content {
+    flex: 1;
+  }
+
+  .step-content h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .step-content pre {
+    margin: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2.25rem;
+    }
+
+    .hero-description {
+      font-size: 1.125rem;
+    }
+  }
+</style>
