@@ -1,0 +1,79 @@
+---
+import Docs from '../../layouts/Docs.astro';
+---
+
+<Docs title="Installation" description="How to install BMB">
+  <h1>Installation</h1>
+
+  <p>BMB supports multiple installation methods across different platforms.</p>
+
+  <h2>Quick Install (Recommended)</h2>
+
+  <h3>Unix/Linux/macOS</h3>
+  <pre><code>curl -sSf https://bmb-lang.org/install.sh | sh</code></pre>
+
+  <h3>Windows</h3>
+  <pre><code>irm https://bmb-lang.org/install.ps1 | iex</code></pre>
+
+  <h2>Build from Source</h2>
+
+  <h3>Prerequisites</h3>
+  <ul>
+    <li>Rust 1.70+ (install via <a href="https://rustup.rs">rustup</a>)</li>
+    <li>Git</li>
+    <li>LLVM 15+ (for native code generation)</li>
+  </ul>
+
+  <h3>Clone and Build</h3>
+  <pre><code># Clone repository
+git clone https://github.com/lang-bmb/lang-bmb
+cd lang-bmb
+
+# Build release
+cargo build --release
+
+# Install to PATH
+cargo install --path bmb</code></pre>
+
+  <h2>Verify Installation</h2>
+  <pre><code># Check version
+bmb --version
+
+# Run a test program
+echo 'fn main() -> i64 = 42;' > test.bmb
+bmb run test.bmb</code></pre>
+
+  <h2>Editor Support</h2>
+
+  <h3>VS Code</h3>
+  <p>Install the BMB extension from the marketplace:</p>
+  <pre><code>ext install lang-bmb.vscode-bmb</code></pre>
+
+  <h3>Other Editors</h3>
+  <p>
+    BMB provides a Language Server Protocol (LSP) implementation that works with any LSP-compatible editor.
+    Configure your editor to use <code>bmb lsp</code> as the language server.
+  </p>
+
+  <h2>Package Manager (곳간)</h2>
+  <p>
+    BMB includes <strong>gotgan</strong> (곳간), a built-in package manager:
+  </p>
+
+  <pre><code># Create a new project
+gotgan new my-project
+cd my-project
+
+# Add a dependency
+gotgan add bmb-json
+
+# Build and run
+gotgan run</code></pre>
+
+  <h2>Next Steps</h2>
+  <ul>
+    <li><a href="/docs/syntax">Language Syntax</a> - Learn the basics</li>
+    <li><a href="/docs/contracts">Contracts</a> - Understand verification</li>
+    <li><a href="https://play.bmb-lang.org">Playground</a> - Try online first</li>
+  </ul>
+</Docs>

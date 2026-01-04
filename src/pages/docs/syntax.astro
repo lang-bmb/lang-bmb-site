@@ -1,0 +1,174 @@
+---
+import Docs from '../../layouts/Docs.astro';
+---
+
+<Docs title="Syntax" description="BMB language syntax reference">
+  <h1>Language Syntax</h1>
+
+  <p>
+    BMB uses a clean, expression-based syntax optimized for AI code generation
+    and contract verification.
+  </p>
+
+  <h2>Functions</h2>
+
+  <p>Functions are defined using the <code>fn</code> keyword:</p>
+
+  <pre><code>-- Simple function
+fn add(a: i64, b: i64) -> i64 = a + b;
+
+-- Multi-line body with block
+fn complex(x: i64) -> i64 = {"{"}
+    let doubled = x * 2;
+    let result = doubled + 1;
+    result
+{"}"};
+
+-- Function with contracts
+fn divide(a: i64, b: i64) -> i64
+  pre b != 0
+  post ret * b == a
+= a / b;</code></pre>
+
+  <h2>Variables</h2>
+
+  <p>Variables are bound with <code>let</code>. All values are immutable by default:</p>
+
+  <pre><code>-- Immutable binding
+let x = 42;
+
+-- With type annotation
+let y: i64 = 100;
+
+-- Let in expression
+let result = let a = 10; let b = 20; a + b;
+-- result = 30</code></pre>
+
+  <h2>Control Flow</h2>
+
+  <h3>If-Then-Else</h3>
+  <pre><code>-- Expression-based if
+let max = if a > b then a else b;
+
+-- Nested conditions
+let sign = if n > 0 then 1
+           else if n < 0 then -1
+           else 0;</code></pre>
+
+  <h3>Pattern Matching (planned)</h3>
+  <pre><code>-- Match expression
+let result = match opt {"{"}
+    Some(x) => x * 2,
+    None => 0,
+{"}"};</code></pre>
+
+  <h2>Types</h2>
+
+  <h3>Primitive Types</h3>
+  <table>
+    <thead>
+      <tr><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>i8, i16, i32, i64, i128</code></td><td>Signed integers</td></tr>
+      <tr><td><code>u8, u16, u32, u64, u128</code></td><td>Unsigned integers</td></tr>
+      <tr><td><code>f32, f64</code></td><td>Floating point</td></tr>
+      <tr><td><code>bool</code></td><td>Boolean (true/false)</td></tr>
+      <tr><td><code>char</code></td><td>Unicode character</td></tr>
+      <tr><td><code>String</code></td><td>String type</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Composite Types (planned)</h3>
+  <pre><code>-- Struct
+struct Point {"{"}
+    x: f64,
+    y: f64,
+{"}"}
+
+-- Enum
+enum Option&lt;T&gt; {"{"}
+    Some(T),
+    None,
+{"}"}
+
+-- Array
+let arr: [i32; 5] = [1, 2, 3, 4, 5];</code></pre>
+
+  <h2>Operators</h2>
+
+  <h3>Arithmetic</h3>
+  <pre><code>let a = 10 + 5;   -- Addition
+let b = 10 - 5;   -- Subtraction
+let c = 10 * 5;   -- Multiplication
+let d = 10 / 5;   -- Division
+let e = 10 - (10 / 3) * 3;  -- Modulo pattern</code></pre>
+
+  <h3>Comparison</h3>
+  <pre><code>let eq = a == b;  -- Equal
+let ne = a != b;  -- Not equal
+let lt = a &lt; b;   -- Less than
+let gt = a &gt; b;   -- Greater than
+let le = a &lt;= b;  -- Less or equal
+let ge = a &gt;= b;  -- Greater or equal</code></pre>
+
+  <h3>Logical</h3>
+  <pre><code>let and_result = a and b;  -- Logical AND
+let or_result = a or b;    -- Logical OR
+let not_result = not a;    -- Logical NOT</code></pre>
+
+  <h2>Comments</h2>
+  <pre><code>-- Single line comment
+
+{"{"}--
+  Multi-line comment
+  spanning multiple lines
+--{"}"}</code></pre>
+
+  <h2>Blocks</h2>
+
+  <p>Block expressions evaluate to their last expression:</p>
+
+  <pre><code>let result = {"{"}
+    let x = compute_x();
+    let y = compute_y();
+    x + y  -- No semicolon = return value
+{"}"};</code></pre>
+
+  <h2>Recursion</h2>
+
+  <p>BMB uses recursion for iteration (no loops):</p>
+
+  <pre><code>-- Tail-recursive sum
+fn sum_iter(n: i64, acc: i64) -> i64 =
+    if n &lt;= 0 then acc
+    else sum_iter(n - 1, acc + n);
+
+fn sum(n: i64) -> i64
+  pre n &gt;= 0
+  post ret == n * (n + 1) / 2
+= sum_iter(n, 0);</code></pre>
+
+  <h2>Next Steps</h2>
+  <ul>
+    <li><a href="/docs/contracts">Contracts</a> - Learn about verification</li>
+    <li><a href="/docs/memory">Memory Model</a> - Ownership and borrowing</li>
+    <li><a href="/docs/examples">Examples</a> - See code samples</li>
+  </ul>
+</Docs>
+
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+  }
+  th, td {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-border);
+    text-align: left;
+  }
+  th {
+    background: var(--color-bg-tertiary);
+  }
+</style>

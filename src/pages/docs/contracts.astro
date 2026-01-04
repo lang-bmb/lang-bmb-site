@@ -1,0 +1,200 @@
+---
+import Docs from '../../layouts/Docs.astro';
+---
+
+<Docs title="Contracts" description="Contract-based verification in BMB">
+  <h1>Contract-Based Verification</h1>
+
+  <p>
+    BMB uses <strong>contracts</strong> to specify function behavior. These contracts are
+    verified at compile-time using an SMT solver (Z3), catching bugs before your code runs.
+  </p>
+
+  <h2>Preconditions</h2>
+
+  <p>
+    Preconditions (<code>pre</code>) specify what must be true when a function is called:
+  </p>
+
+  <pre><code>fn divide(a: i64, b: i64) -> i64
+  pre b != 0  -- Caller must ensure b is not zero
+= a / b;
+
+fn sqrt(n: i64) -> i64
+  pre n >= 0  -- Only non-negative inputs allowed
+= sqrt_impl(n);
+
+fn access(arr: [i64], idx: i64) -> i64
+  pre idx >= 0
+  pre idx < arr.len()  -- Multiple preconditions
+= arr[idx];</code></pre>
+
+  <h2>Postconditions</h2>
+
+  <p>
+    Postconditions (<code>post</code>) specify what will be true when a function returns.
+    Use <code>ret</code> to refer to the return value:
+  </p>
+
+  <pre><code>fn abs(x: i64) -> i64
+  post ret >= 0           -- Result is non-negative
+  post ret == x or ret == 0 - x  -- Result is x or -x
+= if x >= 0 then x else 0 - x;
+
+fn clamp(value: i64, min: i64, max: i64) -> i64
+  pre min <= max
+  post ret >= min and ret <= max  -- Result in range
+= if value < min then min
+  else if value > max then max
+  else value;</code></pre>
+
+  <h2>Combined Contracts</h2>
+
+  <p>Preconditions and postconditions work together:</p>
+
+  <pre><code>fn factorial(n: i64) -> i64
+  pre n >= 0      -- Input must be non-negative
+  post ret >= 1   -- Output is always positive
+= if n <= 1 then 1 else n * factorial(n - 1);
+
+fn power(base: i64, exp: i64) -> i64
+  pre exp >= 0
+  post exp == 0 implies ret == 1
+  post base == 0 and exp > 0 implies ret == 0
+= power_impl(base, exp, 1);</code></pre>
+
+  <h2>Verification Modes</h2>
+
+  <table>
+    <thead>
+      <tr><th>Annotation</th><th>Behavior</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>(none)</td>
+        <td>Full SMT verification required. Compilation fails if unproven.</td>
+      </tr>
+      <tr>
+        <td><code>@trust</code></td>
+        <td>Skip verification. Programmer guarantees correctness.</td>
+      </tr>
+      <tr>
+        <td><code>@check</code></td>
+        <td>Insert runtime assertion if verification times out.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <pre><code>@trust
+fn unsafe_divide(a: i64, b: i64) -> i64
+  pre b != 0
+= a / b;  -- Programmer asserts b != 0
+
+@check
+fn maybe_slow_verify(x: i64) -> i64
+  post ret > 0
+= complex_computation(x);  -- Runtime check if timeout</code></pre>
+
+  <h2>Quantifiers</h2>
+
+  <p>Use <code>forall</code> and <code>exists</code> for array/collection contracts:</p>
+
+  <pre><code>fn is_sorted(arr: [i64]) -> bool
+  post ret == forall(i in 0..arr.len()-1): arr[i] <= arr[i+1]
+= is_sorted_impl(arr);
+
+fn contains(arr: [i64], target: i64) -> bool
+  post ret == exists(i in 0..arr.len()): arr[i] == target
+= contains_impl(arr, target);</code></pre>
+
+  <h2>The <code>old</code> Keyword</h2>
+
+  <p>Use <code>old</code> in postconditions to refer to input values at call time:</p>
+
+  <pre><code>fn increment(x: &mut i64)
+  post x == old(x) + 1  -- x is now one more than before
+= x = x + 1;
+
+fn swap(a: &mut i64, b: &mut i64)
+  post a == old(b)
+  post b == old(a)
+= {"{"}
+    let tmp = a;
+    a = b;
+    b = tmp
+{"}"};</code></pre>
+
+  <h2>Refinement Types</h2>
+
+  <p>Define types with built-in constraints:</p>
+
+  <pre><code>-- A non-zero integer
+type NonZero = i64 where self != 0;
+
+-- A percentage (0-100)
+type Percent = i64 where self >= 0 and self <= 100;
+
+-- A sorted array
+type Sorted&lt;T: Ord&gt; = [T] where forall(i in 0..len(self)-1): self[i] <= self[i+1];
+
+-- Usage: compiler verifies constraints
+fn safe_divide(a: i64, b: NonZero) -> i64 = a / b;  -- No precondition needed!</code></pre>
+
+  <h2>Invariants (planned)</h2>
+
+  <p>Loop invariants for verified iteration:</p>
+
+  <pre><code>fn sum(arr: [i64]) -> i64
+= {"{"}
+    let mut total = 0;
+    let mut i = 0;
+    while i < arr.len()
+      invariant total == sum(arr[0..i])
+      invariant i >= 0 and i <= arr.len()
+    {"{"}
+        total = total + arr[i];
+        i = i + 1;
+    {"}"}
+    total
+{"}"};</code></pre>
+
+  <h2>Contract Design Patterns</h2>
+
+  <h3>Defensive Contracts</h3>
+  <pre><code>fn process_user_input(input: i64) -> i64
+  pre input > 0 and input < 1000000  -- Bounded input
+  post ret != input  -- Some transformation occurred
+= transform(input);</code></pre>
+
+  <h3>Information Hiding</h3>
+  <pre><code>fn create_handle() -> Handle
+  post ret.is_valid()  -- Guarantee valid handle
+= Handle::new();
+
+fn use_handle(h: Handle) -> Result
+  pre h.is_valid()  -- Require valid handle
+= h.perform_operation();</code></pre>
+
+  <h2>Next Steps</h2>
+  <ul>
+    <li><a href="/docs/memory">Memory Model</a> - Ownership and borrowing</li>
+    <li><a href="/docs/examples">Examples</a> - See contracts in action</li>
+    <li><a href="https://play.bmb-lang.org">Playground</a> - Try online</li>
+  </ul>
+</Docs>
+
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+  }
+  th, td {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-border);
+    text-align: left;
+  }
+  th {
+    background: var(--color-bg-tertiary);
+  }
+</style>
