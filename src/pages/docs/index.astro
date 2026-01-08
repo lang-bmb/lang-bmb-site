@@ -18,9 +18,9 @@ import Docs from '../../layouts/Docs.astro';
     This means many bugs are caught before your code ever runs.
   </p>
 
-  <pre><code>fn divide(a: i32, b: i32) -> i32
-  pre  b != 0           // Precondition: b must not be zero
-  post ret * b == a     // Postcondition: result * b equals a
+  <pre><code>fn divide(a: i64, b: i64) -> i64
+  pre  b != 0           -- Precondition: b must not be zero
+  post ret * b == a     -- Postcondition: result * b equals a
 =
   a / b;</code></pre>
 
